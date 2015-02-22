@@ -44,3 +44,13 @@ terraform plan -var-file terraform.tfvars -no-color -module-depth=-1
 ```
 terraform apply
 ```
+
+Authors
+=======
+
+Created and maintained by [Casey Ransom](https://github.com/cransom)
+
+License
+=======
+
+Apache 2 Licensed. See LICENSE for full details.
