@@ -12,6 +12,7 @@ Module Input Variables
 - `public_subnets` - comma separated list of public subnet cidrs
 - `private_subnets` - - comma separated list of private subnet cidrs
 - `azs` - comma separated lists of AZs in which to distribute subnets
+- `enable_dns_hostnames` - A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false.
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
@@ -30,6 +31,8 @@ module "vpc" {
   public_subnets  = "10.0.101.0/24,10.0.102.0/24,10.0.103.0/24"
 
   azs      = "us-west-2a,us-west-2b,us-west-2c"
+
+  enable_dns_hostnames = true
 }
 ```
 
