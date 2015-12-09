@@ -12,6 +12,8 @@ Module Input Variables
 - `public_subnets` - comma separated list of public subnet cidrs
 - `private_subnets` - - comma separated list of private subnet cidrs
 - `azs` - comma separated lists of AZs in which to distribute subnets
+- `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
+- `enable_dns_support` - should be true if you want to use private DNS within the VPC
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
