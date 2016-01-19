@@ -41,6 +41,8 @@ Outputs
  - `vpc_id` - does what it says on the tin
  - `private_subnets` - comma separated list of private subnet ids
  - `public_subnets` - comma separated list of public subnet ids
+ - `public_route_table_id` - public route table id string
+ - `private_route_table_id` - private route table id string
 
 Authors
 =======
