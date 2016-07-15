@@ -11,6 +11,7 @@ resource "aws_internet_gateway" "mod" {
 
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.mod.id}"
+  propagating_vgws = ["${compact(split(",", var.public_propagating_vgws))}"]
   tags { Name = "${var.name}-public" }
 }
 
@@ -22,6 +23,7 @@ resource "aws_route" "public_internet_gateway" {
 
 resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.mod.id}"
+  propagating_vgws = ["${compact(split(",", var.private_propagating_vgws))}"]
   tags { Name = "${var.name}-private" }
 }
 

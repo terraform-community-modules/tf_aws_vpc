@@ -11,3 +11,11 @@ variable "enable_dns_support" {
   description = "should be true if you want to use private DNS within the VPC"
   default = false
 }
+variable "private_propagating_vgws" {
+  description = "A comma separated list of VGWs the private route table should propagate."
+  default = ""
+}
+variable "public_propagating_vgws" {
+  description = "A comma separated list of VGWs the public route table should propagate."
+  default = ""
+}
