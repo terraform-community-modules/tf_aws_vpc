@@ -1,7 +1,13 @@
 variable "name" { }
 variable "cidr" { }
-variable "public_subnets" { default = [] }
-variable "private_subnets" { default = [] }
+variable "public_subnets" {
+  description = "A list of public subnets inside the VPC."
+  default = []
+}
+variable "private_subnets" {
+  description = "A list of private subnets inside the VPC."
+  default = []
+}
 variable "azs" {
   description = "A list of Availability zones in the region"
   default = []
