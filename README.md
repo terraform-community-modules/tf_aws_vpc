@@ -9,13 +9,13 @@ Module Input Variables
 
 - `name` - vpc name
 - `cidr` - vpc cidr
-- `public_subnets` - comma separated list of public subnet cidrs
-- `private_subnets` - - comma separated list of private subnet cidrs
-- `azs` - comma separated lists of AZs in which to distribute subnets
+- `public_subnets` - list of public subnet cidrs
+- `private_subnets` - list of private subnet cidrs
+- `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
-- `private_propagating_vgws` - A comma separated list of VGWs the private route table should propagate.
-- `public_propagating_vgws` - A comma separated list of VGWs the public route table should propagate.
+- `private_propagating_vgws` - list of VGWs the private route table should propagate
+- `public_propagating_vgws` - list of VGWs the public route table should propagate
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
@@ -44,8 +44,8 @@ Outputs
 =======
 
  - `vpc_id` - does what it says on the tin
- - `private_subnets` - comma separated list of private subnet ids
- - `public_subnets` - comma separated list of public subnet ids
+ - `private_subnets` - list of private subnet ids
+ - `public_subnets` - list of public subnet ids
  - `public_route_table_id` - public route table id string
  - `private_route_table_id` - private route table id string
 
