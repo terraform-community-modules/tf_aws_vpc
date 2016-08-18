@@ -23,7 +23,7 @@ It's generally preferable to keep `public_subnets`, `private_subnets`, and
 Usage
 -----
 
-```js
+```hcl
 module "vpc" {
   source = "github.com/terraform-community-modules/tf_aws_vpc"
 
@@ -36,6 +36,9 @@ module "vpc" {
   azs      = ["us-west-2a", "us-west-2b", "us-west-2c"]
 }
 ```
+
+For Terraform version older than 0.7.0 use `ref=v1.0.0`:
+`source = "github.com/terraform-community-modules/tf_aws_vpc?ref=v1.0.0"`
 
 Outputs
 =======
