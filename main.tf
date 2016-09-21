@@ -10,6 +10,10 @@ resource "aws_vpc" "mod" {
 
 resource "aws_internet_gateway" "mod" {
   vpc_id = "${aws_vpc.mod.id}"
+
+  tags {
+    Name = "${var.name}-igw"
+  }
 }
 
 resource "aws_route_table" "public" {
@@ -57,7 +61,7 @@ resource "aws_subnet" "public" {
     Name = "${var.name}-public"
   }
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 }
 
 resource "aws_route_table_association" "private" {
