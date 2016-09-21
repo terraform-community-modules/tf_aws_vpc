@@ -57,7 +57,7 @@ resource "aws_subnet" "public" {
     Name = "${var.name}-public"
   }
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 }
 
 resource "aws_route_table_association" "private" {
