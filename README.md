@@ -14,6 +14,7 @@ Module Input Variables
 - `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
+- `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
 
