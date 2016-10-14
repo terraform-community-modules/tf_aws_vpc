@@ -21,7 +21,7 @@ resource "aws_route_table" "public" {
   propagating_vgws = ["${var.public_propagating_vgws}"]
 
   tags {
-    Name = "${var.name}-public"
+    Name = "${var.name}-rt-public"
   }
 }
 
@@ -31,12 +31,22 @@ resource "aws_route" "public_internet_gateway" {
   gateway_id             = "${aws_internet_gateway.mod.id}"
 }
 
+resource "aws_route" "private_nat_gateway" {
+  route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = "${element(aws_nat_gateway.natgw.*.id, count.index)}"
+  count                  = "${length(var.private_subnets)}"
+
+  depends_on             = ["aws_nat_gateway.natgw"]
+}
+
 resource "aws_route_table" "private" {
   vpc_id           = "${aws_vpc.mod.id}"
   propagating_vgws = ["${var.private_propagating_vgws}"]
+  count            = "${length(var.private_subnets)}"
 
   tags {
-    Name = "${var.name}-private"
+    Name = "${var.name}-rt-private-${element(var.azs, count.index)}"
   }
 }
 
@@ -47,7 +57,7 @@ resource "aws_subnet" "private" {
   count             = "${length(var.private_subnets)}"
 
   tags {
-    Name = "${var.name}-private"
+    Name = "${var.name}-subnet-private-${element(var.azs, count.index)}"
   }
 }
 
@@ -58,16 +68,29 @@ resource "aws_subnet" "public" {
   count             = "${length(var.public_subnets)}"
 
   tags {
-    Name = "${var.name}-public"
+    Name = "${var.name}-subnet-public-${element(var.azs, count.index)}"
   }
 
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 }
 
+resource "aws_eip" "nateip" {
+  vpc   = true
+  count = "${length(var.private_subnets)}"
+}
+
+resource "aws_nat_gateway" "natgw" {
+  allocation_id = "${element(aws_eip.nateip.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.private.*.id, count.index)}"
+  count         = "${length(var.private_subnets)}"
+
+  depends_on = ["aws_internet_gateway.mod"]
+}
+
 resource "aws_route_table_association" "private" {
   count          = "${length(var.private_subnets)}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
-  route_table_id = "${aws_route_table.private.id}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "public" {

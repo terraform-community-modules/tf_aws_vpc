@@ -21,6 +21,9 @@ Module Input Variables
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
 
+This module creates NAT Gateways in each public subnet and sets them as the
+default gateways for the corresponding private subnets.
+
 Usage
 -----
 
