@@ -27,6 +27,11 @@ variable "enable_dns_support" {
   default     = false
 }
 
+variable "enable_nat_gateway" {
+  description = "should be true if you want to provision NAT Gateways for each of your private networks"
+  default     = false
+}
+
 variable "map_public_ip_on_launch" {
   description = "should be false if you do not want to auto-assign public IP on launch"
   default     = true
