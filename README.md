@@ -53,8 +53,13 @@ Outputs
  - `vpc_id` - does what it says on the tin
  - `private_subnets` - list of private subnet ids
  - `public_subnets` - list of public subnet ids
- - `public_route_table_id` - public route table id string
- - `private_route_table_id` - private route table id string
+ - `public_route_table_ids` - list of public route table ids
+ - `private_route_table_ids` - list of private route table ids
+ - `default_security_group_id` - VPC default security group id string
+ - `nat_eips` - list of Elastic IP ids (if any are provisioned)
+
+**NOTE**: previous versions of this module returned a single string as a route
+table ID, while this version returns a list.
 
 Authors
 =======
