@@ -46,3 +46,8 @@ variable "public_propagating_vgws" {
   description = "A list of VGWs the public route table should propagate."
   default     = []
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  default     = {}
+}
