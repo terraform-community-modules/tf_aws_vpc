@@ -30,7 +30,7 @@ Usage
 
 ```hcl
 module "vpc" {
-  source = "github.com/terraform-community-modules/tf_aws_vpc"
+  source = "github.com/whichdigital/tf_aws_vpc"
 
   name = "my-vpc"
 
