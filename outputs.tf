@@ -25,3 +25,7 @@ output "default_security_group_id" {
 output "nat_eips" {
   value = ["${aws_eip.nateip.*.id}"]
 }
+
+output "igw_id" {
+  value = "${aws_internet_gateway.mod.id}"
+}
