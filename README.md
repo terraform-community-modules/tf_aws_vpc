@@ -42,7 +42,7 @@ module "vpc" {
   enable_nat_gateway = "true"
 
   azs      = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  
+
   tags {
     "Terraform" = "true"
     "Environment" = "${var.environment}"
@@ -63,6 +63,7 @@ Outputs
  - `private_route_table_ids` - list of private route table ids
  - `default_security_group_id` - VPC default security group id string
  - `nat_eips` - list of Elastic IP ids (if any are provisioned)
+ - `igw_id` - Internet Gateway id string
 
 **NOTE**: previous versions of this module returned a single string as a route
 table ID, while this version returns a list.
