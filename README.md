@@ -18,6 +18,7 @@ Module Input Variables
 - `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
+- `tags` - dictionary of tags that will be added to resources created by the module
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
@@ -41,6 +42,11 @@ module "vpc" {
   enable_nat_gateway = "true"
 
   azs      = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  
+  tags {
+    "Terraform" = "true"
+    "Environment" = "${var.environment}"
+  }
 }
 ```
 
