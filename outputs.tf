@@ -26,6 +26,10 @@ output "nat_eips" {
   value = ["${aws_eip.nateip.*.id}"]
 }
 
+output "natgw_ids" {
+  value = ["${aws_nat_gateway.natgw.*.id}"]
+}
+
 output "igw_id" {
   value = "${aws_internet_gateway.mod.id}"
 }
