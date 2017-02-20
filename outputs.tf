@@ -28,7 +28,8 @@ output "nat_eips" {
 
 output "nat_eip_public_ips" {
   value = ["${aws_eip.nateip.*.public_ip}"]
-
+}
+  
 output "natgw_ids" {
   value = ["${aws_nat_gateway.natgw.*.id}"]
 }
