@@ -26,7 +26,7 @@ output "nat_eips" {
   value = ["${aws_eip.nateip.*.id}"]
 }
 
-output "nat_eip_public_ips" {
+output "nat_eips_public_ips" {
   value = ["${aws_eip.nateip.*.public_ip}"]
 }
   
