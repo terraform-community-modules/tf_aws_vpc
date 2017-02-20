@@ -63,6 +63,7 @@ Outputs
  - `private_route_table_ids` - list of private route table ids
  - `default_security_group_id` - VPC default security group id string
  - `nat_eips` - list of Elastic IP ids (if any are provisioned)
+ - `nat_eip_public_ips` - list of NAT gateways' public Elastic IP's (if any are provisioned)
  - `igw_id` - Internet Gateway id string
 
 **NOTE**: previous versions of this module returned a single string as a route
