@@ -53,12 +53,11 @@ resource "aws_subnet" "database" {
 }
 
 resource "aws_db_subnet_group" "database" {
-  name        = "${var.name}-database-subnet-group"
+  name        = "${var.name}-rds-subnet-group"
   description = "Database subnet groups for ${var.name}"
   subnet_ids  = ["${aws_subnet.database.*.id}"]
   tags        = "${merge(var.tags, map("Name", format("%s-database-subnet-group", var.name)))}"
-  count       = "${length(var.database_subnets) > 0 ? 1: 0}"
-  depends_on  = ["aws_subnet.database"]
+  count       = "${length(var.database_subnets) > 0 ? 1 : 0}"
 }
 
 resource "aws_subnet" "public" {
