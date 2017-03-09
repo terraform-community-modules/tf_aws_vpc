@@ -12,6 +12,12 @@ variable "private_subnets" {
   default     = []
 }
 
+variable "database_subnets" {
+  type        = "list"
+  description = "A list of database subnets"
+  default     = []
+}
+
 variable "azs" {
   description = "A list of Availability zones in the region"
   default     = []

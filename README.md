@@ -11,6 +11,7 @@ Module Input Variables
 - `cidr` - vpc cidr
 - `public_subnets` - list of public subnet cidrs
 - `private_subnets` - list of private subnet cidrs
+- `database_subnets` - list of private RDS subnet cidrs
 - `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
@@ -59,6 +60,7 @@ Outputs
  - `vpc_id` - does what it says on the tin
  - `private_subnets` - list of private subnet ids
  - `public_subnets` - list of public subnet ids
+ - `database_subnets` - list of database subnets ids
  - `public_route_table_ids` - list of public route table ids
  - `private_route_table_ids` - list of private route table ids
  - `default_security_group_id` - VPC default security group id string
