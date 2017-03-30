@@ -61,11 +61,13 @@ Outputs
  - `private_subnets` - list of private subnet ids
  - `public_subnets` - list of public subnet ids
  - `database_subnets` - list of database subnets ids
+ - `database_subnet_group` - db subnet group name
  - `public_route_table_ids` - list of public route table ids
  - `private_route_table_ids` - list of private route table ids
  - `default_security_group_id` - VPC default security group id string
  - `nat_eips` - list of Elastic IP ids (if any are provisioned)
  - `nat_eips_public_ips` - list of NAT gateways' public Elastic IP's (if any are provisioned)
+ - `natgw_ids` - list of NAT gateway ids
  - `igw_id` - Internet Gateway id string
 
 **NOTE**: previous versions of this module returned a single string as a route
