@@ -12,6 +12,7 @@ Module Input Variables
 - `public_subnets` - list of public subnet cidrs
 - `private_subnets` - list of private subnet cidrs
 - `database_subnets` - list of private RDS subnet cidrs
+- `elasticache_subnets` - list of private Elasticache subnet cidrs
 - `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
@@ -62,6 +63,8 @@ Outputs
  - `public_subnets` - list of public subnet ids
  - `database_subnets` - list of database subnets ids
  - `database_subnet_group` - db subnet group name
+ - `elasticache_subnets` - list of elasticache subnets ids
+ - `elasticache_subnet_group` - elasticache subnet group name
  - `public_route_table_ids` - list of public route table ids
  - `private_route_table_ids` - list of private route table ids
  - `default_security_group_id` - VPC default security group id string
