@@ -18,6 +18,12 @@ variable "database_subnets" {
   default     = []
 }
 
+variable "elasticache_subnets" {
+  type        = "list"
+  description = "A list of elasticache subnets"
+  default     = []
+}
+
 variable "azs" {
   description = "A list of Availability zones in the region"
   default     = []

@@ -60,6 +60,22 @@ resource "aws_db_subnet_group" "database" {
   count       = "${length(var.database_subnets) > 0 ? 1 : 0}"
 }
 
+resource "aws_subnet" "elasticache" {
+  vpc_id            = "${aws_vpc.mod.id}"
+  cidr_block        = "${var.elasticache_subnets[count.index]}"
+  availability_zone = "${element(var.azs, count.index)}"
+  count             = "${length(var.elasticache_subnets)}"
+  tags              = "${merge(var.tags, map("Name", format("%s-elasticache-subnet-%s", var.name, element(var.azs, count.index))))}"
+}
+
+resource "aws_elasticache_subnet_group" "elasticache" {
+  name        = "${var.name}-elasticache-subnet-group"
+  description = "Elasticache subnet groups for ${var.name}"
+  subnet_ids  = ["${aws_subnet.elasticache.*.id}"]
+  tags        = "${merge(var.tags, map("Name", format("%s-elasticache-subnet-group", var.name)))}"
+  count       = "${length(var.elasticache_subnets) > 0 ? 1 : 0}"
+}
+
 resource "aws_subnet" "public" {
   vpc_id            = "${aws_vpc.mod.id}"
   cidr_block        = "${var.public_subnets[count.index]}"
@@ -92,6 +108,12 @@ resource "aws_route_table_association" "private" {
 resource "aws_route_table_association" "database" {
   count          = "${length(var.database_subnets)}"
   subnet_id      = "${element(aws_subnet.database.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
+}
+
+resource "aws_route_table_association" "elasticache" {
+  count          = "${length(var.elasticache_subnets)}"
+  subnet_id      = "${element(aws_subnet.elasticache.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
