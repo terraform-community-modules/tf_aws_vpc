@@ -26,13 +26,13 @@ resource "aws_route" "private_nat_gateway" {
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${element(aws_nat_gateway.natgw.*.id, count.index % length(var.azs))}"
-  count                  = "${length(var.private_subnets) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
+  count                  = "${length(var.azs) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
 }
 
 resource "aws_route_table" "private" {
   vpc_id           = "${aws_vpc.mod.id}"
   propagating_vgws = ["${var.private_propagating_vgws}"]
-  count            = "${length(var.private_subnets)}"
+  count            = "${length(var.azs)}"
   tags             = "${merge(var.tags, map("Name", format("%s-rt-private-%s", var.name, element(var.azs, count.index))))}"
 }
 
@@ -86,13 +86,13 @@ resource "aws_nat_gateway" "natgw" {
 resource "aws_route_table_association" "private" {
   count          = "${length(var.private_subnets)}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
-  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index % length(var.azs))}"
 }
 
 resource "aws_route_table_association" "database" {
   count          = "${length(var.database_subnets)}"
   subnet_id      = "${element(aws_subnet.database.*.id, count.index)}"
-  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index % length(var.azs))}"
 }
 
 resource "aws_route_table_association" "public" {
