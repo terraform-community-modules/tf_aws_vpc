@@ -72,7 +72,6 @@ resource "aws_elasticache_subnet_group" "elasticache" {
   name        = "${var.name}-elasticache-subnet-group"
   description = "Elasticache subnet groups for ${var.name}"
   subnet_ids  = ["${aws_subnet.elasticache.*.id}"]
-  tags        = "${merge(var.tags, map("Name", format("%s-elasticache-subnet-group", var.name)))}"
   count       = "${length(var.elasticache_subnets) > 0 ? 1 : 0}"
 }
 
