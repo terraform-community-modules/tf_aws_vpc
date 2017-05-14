@@ -25,7 +25,7 @@ resource "aws_route" "public_internet_gateway" {
 resource "aws_route" "private_nat_gateway" {
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = "${element(aws_nat_gateway.natgw.*.id, count.index % length(var.azs))}"
+  nat_gateway_id         = "${element(aws_nat_gateway.natgw.*.id, count.index)}"
   count                  = "${length(var.azs) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
 }
 
@@ -86,13 +86,13 @@ resource "aws_nat_gateway" "natgw" {
 resource "aws_route_table_association" "private" {
   count          = "${length(var.private_subnets)}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
-  route_table_id = "${element(aws_route_table.private.*.id, count.index % length(var.azs))}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "database" {
   count          = "${length(var.database_subnets)}"
   subnet_id      = "${element(aws_subnet.database.*.id, count.index)}"
-  route_table_id = "${element(aws_route_table.private.*.id, count.index % length(var.azs))}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "public" {
