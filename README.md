@@ -16,7 +16,7 @@ Module Input Variables
 - `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
-- `enable_nat_gateway` - should be true if you want to provision NAT Gateways for each of your private networks
+- `enable_nat_gateway` - should be true if you want to provision NAT Gateways
 - `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
@@ -25,7 +25,7 @@ Module Input Variables
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
 
-This module optionally creates NAT Gateways in each public subnet and sets them
+This module optionally creates NAT Gateways (one per availability zone) and sets them
 as the default gateways for the corresponding private subnets.
 
 Usage
