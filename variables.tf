@@ -63,3 +63,23 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
 }
+
+variable "public_subnet_tags" {
+  description = "A map of extra tags to add to public subnets"
+  default     = {}
+}
+
+variable "private_subnet_tags" {
+  description = "A map of extra tags to add to private subnets"
+  default     = {}
+}
+
+variable "database_subnet_tags" {
+  description = "A map of extra tags to add to database subnets"
+  default     = {}
+}
+
+variable "elasticache_subnet_tags" {
+  description = "A map of extra tags to add to elasticache subnets"
+  default     = {}
+}

@@ -21,6 +21,10 @@ Module Input Variables
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
 - `tags` - dictionary of tags that will be added to resources created by the module
+- `public_subnet_tags` - dictionary of tags to apply to public subnets in addition to those in `tags` variable
+- `private_subnet_tags` - dictionary of tags to apply to private subnets in addition to those in `tags` variable
+- `database_subnet_tags` - dictionary of tags to apply to database subnets in addition to those in `tags` variable
+- `elasticache_subnet_tags` - dictionary of tags to apply to elasticache subnets in addition to those in `tags` variable
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
