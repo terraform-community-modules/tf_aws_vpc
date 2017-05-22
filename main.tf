@@ -41,7 +41,7 @@ resource "aws_subnet" "private" {
   cidr_block        = "${var.private_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.private_subnets)}"
-  tags              = "${merge(var.tags, map("Name", format("%s-subnet-private-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, map("Name", format("%s-subnet-private-%s", var.name, element(var.azs, count.index))), map("Tier", "private"))}"
 }
 
 resource "aws_subnet" "database" {
@@ -49,7 +49,7 @@ resource "aws_subnet" "database" {
   cidr_block        = "${var.database_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.database_subnets)}"
-  tags              = "${merge(var.tags, map("Name", format("%s-database-subnet-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, map("Name", format("%s-database-subnet-%s", var.name, element(var.azs, count.index))), map("Tier", "database"))}"
 }
 
 resource "aws_db_subnet_group" "database" {
@@ -65,7 +65,7 @@ resource "aws_subnet" "elasticache" {
   cidr_block        = "${var.elasticache_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.elasticache_subnets)}"
-  tags              = "${merge(var.tags, map("Name", format("%s-elasticache-subnet-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, map("Name", format("%s-elasticache-subnet-%s", var.name, element(var.azs, count.index))), map("Tier", "elasticache"))}"
 }
 
 resource "aws_elasticache_subnet_group" "elasticache" {
@@ -80,7 +80,7 @@ resource "aws_subnet" "public" {
   cidr_block        = "${var.public_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.public_subnets)}"
-  tags              = "${merge(var.tags, map("Name", format("%s-subnet-public-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, map("Name", format("%s-subnet-public-%s", var.name, element(var.azs, count.index))), map("Tier", "public"))}"
 
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 }
