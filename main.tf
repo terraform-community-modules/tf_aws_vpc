@@ -37,6 +37,10 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_subnet" "private" {
+  lifecycle {
+    create_before_destroy = true
+  }
+
   vpc_id            = "${aws_vpc.mod.id}"
   cidr_block        = "${var.private_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
@@ -76,6 +80,10 @@ resource "aws_elasticache_subnet_group" "elasticache" {
 }
 
 resource "aws_subnet" "public" {
+  lifecycle {
+    create_before_destroy = true
+  }
+
   vpc_id            = "${aws_vpc.mod.id}"
   cidr_block        = "${var.public_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
