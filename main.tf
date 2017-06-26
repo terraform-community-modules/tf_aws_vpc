@@ -49,7 +49,7 @@ resource "aws_subnet" "database" {
   cidr_block        = "${var.database_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.database_subnets)}"
-  tags              = "${merge(var.tags, var.database_subnet_tags, map("Name", format("%s-database-subnet-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, var.database_subnet_tags, map("Name", format("%s-subnet-database-%s", var.name, element(var.azs, count.index))))}"
 }
 
 resource "aws_db_subnet_group" "database" {
@@ -65,7 +65,7 @@ resource "aws_subnet" "elasticache" {
   cidr_block        = "${var.elasticache_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.elasticache_subnets)}"
-  tags              = "${merge(var.tags, var.elasticache_subnet_tags, map("Name", format("%s-elasticache-subnet-%s", var.name, element(var.azs, count.index))))}"
+  tags              = "${merge(var.tags, var.elasticache_subnet_tags, map("Name", format("%s-subnet-elasticache-%s", var.name, element(var.azs, count.index))))}"
 }
 
 resource "aws_elasticache_subnet_group" "elasticache" {
