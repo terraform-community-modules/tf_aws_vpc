@@ -9,6 +9,7 @@ Module Input Variables
 
 - `name` - vpc name
 - `cidr` - vpc cidr
+- `instance_tenancy` - tenancy option for instances launched into the VPC
 - `public_subnets` - list of public subnet cidrs
 - `private_subnets` - list of private subnet cidrs
 - `database_subnets` - list of private RDS subnet cidrs
