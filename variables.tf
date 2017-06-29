@@ -1,6 +1,12 @@
-variable "name" {}
+variable "name" {
+  description = "Name to be used on all the resources as identifier"
+  default     = ""
+}
 
-variable "cidr" {}
+variable "cidr" {
+  description = "The CIDR block for the VPC"
+  default     = ""
+}
 
 variable "instance_tenancy" {
   description = "A tenancy option for instances launched into the VPC"

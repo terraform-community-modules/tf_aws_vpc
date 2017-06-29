@@ -7,8 +7,8 @@ A terraform module to provide a VPC in AWS.
 Module Input Variables
 ----------------------
 
-- `name` - vpc name
-- `cidr` - vpc cidr
+- `name` - name to be used on all the resources created by the module
+- `cidr` - the CIDR block for the VPC
 - `instance_tenancy` - tenancy option for instances launched into the VPC
 - `public_subnets` - list of public subnet cidrs
 - `private_subnets` - list of private subnet cidrs
@@ -22,6 +22,10 @@ Module Input Variables
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
 - `tags` - dictionary of tags that will be added to resources created by the module
+- `public_subnet_tags` - dictionary of tags that will be added to public subnets created by the module
+- `private_subnet_tags` - dictionary of tags that will be added to private subnets created by the module
+- `database_subnet_tags` - dictionary of tags that will be added to database subnets created by the module
+- `elasticache_subnet_tags` - dictionary of tags that will be added to elasticache subnets created by the module
 
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
