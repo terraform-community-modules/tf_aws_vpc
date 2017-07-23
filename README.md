@@ -61,6 +61,38 @@ module "vpc" {
 For Terraform version older than 0.7.0 use `ref=v1.0.0`:
 `source = "github.com/terraform-community-modules/tf_aws_vpc?ref=v1.0.0"`
 
+Usage with other modules
+------------------------
+
+There are situations where other modules will be used alongside this module, but
+all the networking components out of this module (such as route tables, NAT
+Gateways and Internet Gateways) needs to be provisioned first before resources
+(such as EC2 instances) can be created in other modules. Use of `depends_id` as
+an output variable provides a suitable workaround.
+
+Here is an example of usage alongside the `tf_aws_bastion_s3_keys` community
+module so that the bastion host is only created once all resources in the VPC
+module has been created.
+
+```hcl
+module "vpc" {
+  ...
+}
+
+module "bastion" {
+  source                      = "github.com/terraform-community-modules/tf_aws_bastion_s3_keys"
+  instance_type               = "t2.micro"
+  ami                         = "ami-123456"
+  region                      = "eu-west-1"
+  iam_instance_profile        = "s3_readonly"
+  s3_bucket_name              = "public-keys-demo-bucket"
+  vpc_id                      = "vpc-123456"
+  subnet_ids                  = ["subnet-123456", "subnet-6789123", "subnet-321321"]
+  keys_update_frequency       = "5,20,35,50 * * * *"
+  additional_user_data_script = "echo ${module.vpc.depends_id}"
+}
+```
+
 Outputs
 =======
 
@@ -78,6 +110,7 @@ Outputs
  - `nat_eips_public_ips` - list of NAT gateways' public Elastic IP's (if any are provisioned)
  - `natgw_ids` - list of NAT gateway ids
  - `igw_id` - Internet Gateway id string
+ - `depends_id` - this can be used when resources in other modules depend on completion of all resources in this module
 
 **NOTE**: previous versions of this module returned a single string as a route
 table ID, while this version returns a list.

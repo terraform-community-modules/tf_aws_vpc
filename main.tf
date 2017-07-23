@@ -144,3 +144,29 @@ resource "aws_route_table_association" "public" {
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }
+
+resource "null_resource" "dummy_dependency" {
+  depends_on = [
+    "aws_vpc.mod",
+    "aws_internet_gateway.mod",
+    "aws_route_table.public",
+    "aws_route.public_internet_gateway",
+    "aws_route.private_nat_gateway",
+    "aws_route_table.private",
+    "aws_subnet.private",
+    "aws_subnet.database",
+    "aws_db_subnet_group.database",
+    "aws_subnet.elasticache",
+    "aws_elasticache_subnet_group.elasticache",
+    "aws_subnet.public",
+    "aws_eip.nateip",
+    "aws_nat_gateway.natgw",
+    "aws_vpc_endpoint.ep",
+    "aws_vpc_endpoint_route_table_association.private_s3",
+    "aws_vpc_endpoint_route_table_association.public_s3",
+    "aws_route_table_association.private",
+    "aws_route_table_association.database",
+    "aws_route_table_association.elasticache",
+    "aws_route_table_association.public"
+  ]
+}

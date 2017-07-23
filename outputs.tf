@@ -53,3 +53,7 @@ output "natgw_ids" {
 output "igw_id" {
   value = "${aws_internet_gateway.mod.id}"
 }
+
+output "depends_id" {
+  value = "${null_resource.dummy_dependency.id}"
+}
