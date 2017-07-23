@@ -18,6 +18,7 @@ Module Input Variables
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
 - `enable_nat_gateway` - should be true if you want to provision NAT Gateways
+- `single_nat_gateway` - should be true if you want to provision a single shared NAT Gateway across all of your private networks
 - `enable_s3_endpoint` - should be true if you want to provision an S3 endpoint within the VPC
 - `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 - `private_propagating_vgws` - list of VGWs the private route table should propagate

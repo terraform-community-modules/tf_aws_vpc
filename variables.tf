@@ -55,6 +55,11 @@ variable "enable_nat_gateway" {
   default     = false
 }
 
+variable "single_nat_gateway" {
+  description = "should be true if you want to provision a single shared NAT Gateway across all of your private networks"
+  default     = false
+}
+
 variable "enable_s3_endpoint" {
   description = "should be true if you want to provision an S3 endpoint to the VPC"
   default     = false

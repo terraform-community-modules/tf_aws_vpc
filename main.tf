@@ -88,13 +88,13 @@ resource "aws_subnet" "public" {
 
 resource "aws_eip" "nateip" {
   vpc   = true
-  count = "${length(var.azs) * lookup(map("true", 1, "1", 1), var.enable_nat_gateway, 0)}"
+  count = "${(var.single_nat_gateway ? 1 : length(var.azs)) * lookup(map("true", 1, "1", 1), var.enable_nat_gateway, 0)}"
 }
 
 resource "aws_nat_gateway" "natgw" {
-  allocation_id = "${element(aws_eip.nateip.*.id, count.index)}"
-  subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
-  count         = "${length(var.azs) * lookup(map("true", 1, "1", 1), var.enable_nat_gateway, 0)}"
+  allocation_id = "${element(aws_eip.nateip.*.id, (var.single_nat_gateway ? 0 : count.index))}"
+  subnet_id     = "${element(aws_subnet.public.*.id, (var.single_nat_gateway ? 0 : count.index))}"
+  count         = "${(var.single_nat_gateway ? 1 : length(var.azs)) * lookup(map("true", 1, "1", 1), var.enable_nat_gateway, 0)}"
 
   depends_on = ["aws_internet_gateway.mod"]
 }
