@@ -99,6 +99,28 @@ resource "aws_nat_gateway" "natgw" {
   depends_on = ["aws_internet_gateway.mod"]
 }
 
+data "aws_vpc_endpoint_service" "s3" {
+  service = "s3"
+}
+
+resource "aws_vpc_endpoint" "ep" {
+  vpc_id       = "${aws_vpc.mod.id}"
+  service_name = "${data.aws_vpc_endpoint_service.s3.service_name}"
+  count        = "${var.enable_s3_endpoint}"
+}
+
+resource "aws_vpc_endpoint_route_table_association" "private_s3" {
+  count           = "${var.enable_s3_endpoint ? length(var.private_subnets) : 0}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.ep.id}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
+}
+
+resource "aws_vpc_endpoint_route_table_association" "public_s3" {
+  count           = "${var.enable_s3_endpoint ? length(var.public_subnets) : 0}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.ep.id}"
+  route_table_id  = "${aws_route_table.public.id}"
+}
+
 resource "aws_route_table_association" "private" {
   count          = "${length(var.private_subnets)}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
