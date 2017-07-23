@@ -27,7 +27,7 @@ resource "aws_route" "private_nat_gateway" {
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${element(aws_nat_gateway.natgw.*.id, count.index)}"
-  count                  = "${length(var.azs) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
+  count                  = "${var.enable_nat_gateway ? length(var.azs) : 0}"
 }
 
 resource "aws_route_table" "private" {
@@ -88,13 +88,13 @@ resource "aws_subnet" "public" {
 
 resource "aws_eip" "nateip" {
   vpc   = true
-  count = "${length(var.azs) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
+  count = "${var.enable_nat_gateway ? length(var.azs) : 0}"
 }
 
 resource "aws_nat_gateway" "natgw" {
   allocation_id = "${element(aws_eip.nateip.*.id, count.index)}"
   subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
-  count         = "${length(var.azs) * lookup(map(var.enable_nat_gateway, 1), "true", 0)}"
+  count         = "${var.enable_nat_gateway ? length(var.azs) : 0}"
 
   depends_on = ["aws_internet_gateway.mod"]
 }
