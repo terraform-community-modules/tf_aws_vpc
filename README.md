@@ -76,6 +76,7 @@ module has been created.
 
 ```hcl
 module "vpc" {
+  source = "github.com/terraform-community-modules/tf_aws_vpc"
   ...
 }
 
