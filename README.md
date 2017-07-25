@@ -87,8 +87,8 @@ module "bastion" {
   region                      = "eu-west-1"
   iam_instance_profile        = "s3_readonly"
   s3_bucket_name              = "public-keys-demo-bucket"
-  vpc_id                      = "vpc-123456"
-  subnet_ids                  = ["subnet-123456", "subnet-6789123", "subnet-321321"]
+  vpc_id                      = "${module.vpc.id}"
+  subnet_ids                  = "${module.vpc.public_subnets}"
   keys_update_frequency       = "5,20,35,50 * * * *"
   additional_user_data_script = "echo ${module.vpc.depends_id}"
 }
