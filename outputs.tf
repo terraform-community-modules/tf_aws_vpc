@@ -26,6 +26,10 @@ output "vpc_id" {
   value = "${aws_vpc.mod.id}"
 }
 
+output "vpc_cidr_block" {
+  value = "${aws_vpc.mod.cidr_block}"
+}
+
 output "public_route_table_ids" {
   value = ["${aws_route_table.public.*.id}"]
 }
