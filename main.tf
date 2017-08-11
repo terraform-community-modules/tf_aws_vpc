@@ -93,7 +93,7 @@ resource "aws_eip" "nateip" {
 
 resource "aws_nat_gateway" "natgw" {
   allocation_id = "${element(aws_eip.nateip.*.id, (var.single_nat_gateway ? 0 : count.index))}"
-  subnet_id     = "${element(aws_subnet.public.*.id, (var.single_nat_gateway ? 0 : count.index))}"
+  subnet_id     = "${element(concat(aws_subnet.public.*.id, list("")), (var.single_nat_gateway ? 0 : count.index))}"
   count         = "${var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : length(var.azs)) : 0}"
 
   depends_on = ["aws_internet_gateway.mod"]
