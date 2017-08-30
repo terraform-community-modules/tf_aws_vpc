@@ -79,6 +79,7 @@ Outputs
  - `nat_eips_public_ips` - list of NAT gateways' public Elastic IP's (if any are provisioned)
  - `natgw_ids` - list of NAT gateway ids
  - `igw_id` - Internet Gateway id string
+ - `default_network_acl_id` - VPC default network ACL id
 
 **NOTE**: previous versions of this module returned a single string as a route
 table ID, while this version returns a list.
