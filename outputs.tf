@@ -37,3 +37,7 @@ output "natgw_ids" {
 output "igw_id" {
   value = "${aws_internet_gateway.mod.id}"
 }
+
+output "default_network_acl_id" {
+  value = "${aws_vpc.mod.default_network_acl_id}"
+}
