@@ -64,6 +64,7 @@ variable "enable_s3_endpoint" {
   description = "should be true if you want to provision an S3 endpoint to the VPC"
   default     = false
 }
+
 variable "map_public_ip_on_launch" {
   description = "should be false if you do not want to auto-assign public IP on launch"
   default     = true
