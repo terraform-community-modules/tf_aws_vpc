@@ -20,6 +20,7 @@ Module Input Variables
 - `enable_nat_gateway` - should be true if you want to provision NAT Gateways
 - `single_nat_gateway` - should be true if you want to provision a single shared NAT Gateway across all of your private networks
 - `enable_s3_endpoint` - should be true if you want to provision an S3 endpoint within the VPC
+- `enable_dynamodb_endpoint` - should be true if you want to provision a DynamoDB endpoint within the VPC
 - `map_public_ip_on_launch` - should be false if you do not want to auto-assign public IP on launch
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
