@@ -63,9 +63,9 @@ output "default_network_acl_id" {
 }
 
 output "vpc_s3_endpoint_id" {
-  value = "aws_vpc_endpoint.s3-ep.id"
+  value = "aws_vpc_endpoint.s3.id"
 }
 
 output "vpc_dynamodb_endpoint_id" {
-  value = "aws_vpc_endpoint.dynamodb-ep.id"
+  value = "aws_vpc_endpoint.dynamodb.id"
 }
