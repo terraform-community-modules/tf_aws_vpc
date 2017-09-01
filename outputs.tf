@@ -62,10 +62,10 @@ output "default_network_acl_id" {
   value = "${aws_vpc.mod.default_network_acl_id}"
 }
 
-output "vpc_s3_endpoint_id"
+output "vpc_s3_endpoint_id" {
   value = "aws_vpc_endpoint.s3-ep.id"
 }
 
-output "vpc_dynamodb_endpoint_id"
+output "vpc_dynamodb_endpoint_id" {
   value = "aws_vpc_endpoint.s3-ep.id"
 }
