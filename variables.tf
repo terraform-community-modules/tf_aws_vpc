@@ -29,6 +29,11 @@ variable "database_subnets" {
   default     = []
 }
 
+variable "create_database_subnet_group" {
+  description = "Controls, if should database subnet group be created."
+  default     = true
+}
+
 variable "elasticache_subnets" {
   type        = "list"
   description = "A list of elasticache subnets"

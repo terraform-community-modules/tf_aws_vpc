@@ -70,7 +70,7 @@ resource "aws_subnet" "database" {
 }
 
 resource "aws_db_subnet_group" "database" {
-  count = "${length(var.database_subnets) > 0 ? 1 : 0}"
+  count = "${length(var.database_subnets) > 0 && var.create_database_subnet_group ? 1 : 0}"
 
   name        = "${var.name}-rds-subnet-group"
   description = "Database subnet groups for ${var.name}"
