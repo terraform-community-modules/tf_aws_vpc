@@ -70,6 +70,45 @@ module "vpc" {
 For Terraform version older than 0.7.0 use `ref=v1.0.0`:
 `source = "github.com/terraform-community-modules/tf_aws_vpc?ref=v1.0.0"`
 
+Using this module with other modules that create EC2 instances
+--------------------------------------------------------------
+
+If you are using this module with other modules that create EC2 instances, be aware that if your EC2 instance needs internet access to perform software installation on provisioning, then your instance will depend on both the NAT gateways and the Internet Gateway being available.
+
+Currently Terraform does not cater for this dependency out-of-the-box, and so you will need to cater for this explicitly. A easy workaround will be to add extra tags to the EC2 instance, which will explicitly look up the id of the NAT gateways and Internet gateway. For example:
+
+```hcl
+module "vpc" {
+  source = "github.com/terraform-community-modules/tf_aws_vpc"
+
+  name = "my-vpc"
+
+  cidr = "10.0.0.0/16"
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+  enable_nat_gateway = "true"
+
+  azs      = ["us-west-2a", "us-west-2b", "us-west-2c"]
+
+  tags {
+    "Terraform" = "true"
+    "Environment" = "${var.environment}"
+  }
+}
+
+resource "aws_instance" "my_app" {
+  
+  # other parameters required for the instance here
+  
+  # tags put in to make dependency to internet gateway and NAT gateways explicit
+  tags {
+    igw = "${module.vpc.igw_id}"
+    nat_gw = "${join(",", module.vpc.natgw_ids)}"
+  }
+}
+```
+
 Outputs
 =======
 
