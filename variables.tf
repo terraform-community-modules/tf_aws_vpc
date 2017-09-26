@@ -46,3 +46,11 @@ variable "public_propagating_vgws" {
   description = "A list of VGWs the public route table should propagate."
   default     = []
 }
+
+variable "vpc_peer_connection_ids" {
+  description = "A list of VPC Peering connection id"
+  default     = []
+}
+variable "enable_vpc_peering" {
+  description = "A switch to enable or disable whether addtional routes can be added"
+}
