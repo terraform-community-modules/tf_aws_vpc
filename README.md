@@ -1,6 +1,12 @@
 vpc terraform module
 ===========
 
+# This module is deprecated and [terraform-aws-modules/terraform-aws-vpc module](https://github.com/terraform-aws-modules/terraform-aws-vpc) published on [the Terraform registry](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws) should be used instead.
+
+## This repository will not have active support any more.
+
+---
+
 A terraform module to provide a VPC in AWS.
 
 
