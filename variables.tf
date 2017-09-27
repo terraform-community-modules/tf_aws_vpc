@@ -47,10 +47,11 @@ variable "public_propagating_vgws" {
   default     = []
 }
 
-variable "vpc_peer_connection_id" {
+variable "vpc_peer_connection" {
   description = "A list of VPC Peering connection id"
-  default     = ""
+  default     = []
 }
 variable "enable_vpc_peering" {
   description = "A switch to enable or disable whether addtional routes can be added"
+  default = "false"
 }

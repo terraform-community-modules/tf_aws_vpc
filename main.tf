@@ -50,8 +50,8 @@ resource "aws_route_table" "private" {
 
 resource "aws_route" "private_vpc_peering" {
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
-  destination_cidr_block = "10.150.0.0/16"
-  vpc_peering_connection_id = "${var.vpc_peer_connection_id}"
+  destination_cidr_block = "${var.vpc_peer_connection[0]}"
+  vpc_peering_connection_id = "${var.vpc_peer_connection[1]}"
   count                  = "${length(var.private_subnets) * lookup(map(var.enable_vpc_peering, 1), "true", 0)}"
 }
 
