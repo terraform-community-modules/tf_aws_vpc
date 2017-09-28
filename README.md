@@ -19,6 +19,9 @@ Module Input Variables
 - `private_propagating_vgws` - list of VGWs the private route table should propagate
 - `public_propagating_vgws` - list of VGWs the public route table should propagate
 
+- `enable_vpc_peering` - should be true if you want to apply the VPC peering connections.
+- `vpc_peer_connection` - list  of destination subnet and vpc connection peer.
+
 It's generally preferable to keep `public_subnets`, `private_subnets`, and
 `azs` to lists of the same length.
 
