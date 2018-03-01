@@ -24,6 +24,8 @@ Module Input Variables
 - `azs` - list of AZs in which to distribute subnets
 - `enable_dns_hostnames` - should be true if you want to use private DNS within the VPC
 - `enable_dns_support` - should be true if you want to use private DNS within the VPC
+- `enable_classiclink` - should be true if you want to use ClassicLink within the VPC
+- `enable_classiclink_dns_support` - should be true if you want to use private DNS within the classiclinks
 - `enable_nat_gateway` - should be true if you want to provision NAT Gateways
 - `single_nat_gateway` - should be true if you want to provision a single shared NAT Gateway across all of your private networks
 - `enable_s3_endpoint` - should be true if you want to provision an S3 endpoint within the VPC

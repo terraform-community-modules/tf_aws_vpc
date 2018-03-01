@@ -55,6 +55,16 @@ variable "enable_dns_support" {
   default     = false
 }
 
+variable "enable_classiclink" {
+  description = "should be true if you want to use ClassicLink within the VPC"
+  default     = false
+}
+
+variable "enable_classiclink_dns_support" {
+  description = "should be true if you want to use private DNS within the classiclinks"
+  default     = false
+}
+
 variable "enable_nat_gateway" {
   description = "should be true if you want to provision NAT Gateways for each of your private networks"
   default     = false
