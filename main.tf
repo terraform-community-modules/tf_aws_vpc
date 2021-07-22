@@ -49,10 +49,10 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route" "private_vpc_peering" {
-  route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
-  destination_cidr_block = "${var.vpc_peer_connection[0]}"
+  route_table_id            = "${element(aws_route_table.private.*.id, count.index)}"
+  destination_cidr_block    = "${var.vpc_peer_connection[0]}"
   vpc_peering_connection_id = "${var.vpc_peer_connection[1]}"
-  count                  = "${length(var.private_subnets) * lookup(map(var.enable_vpc_peering, 1), "true", 0)}"
+  count                     = "${length(var.private_subnets) * lookup(map(var.enable_vpc_peering, 1), "true", 0)}"
 }
 
 resource "aws_subnet" "private" {
@@ -102,4 +102,21 @@ resource "aws_route_table_association" "public" {
   count          = "${length(var.public_subnets)}"
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = "${aws_vpc.mod.id}"
+  service_name = "com.amazonaws.eu-west-1.s3"
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3_endpoint_public" {
+  count           = "${length(var.public_subnets)}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
+  route_table_id  = "${element(aws_route_table.public.*.id, count.index)}"
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3_endpoint_private" {
+  count           = "${length(var.private_subnets)}"
+  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
+  route_table_id  = "${element(aws_route_table.private.*.id, count.index)}"
 }

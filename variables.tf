@@ -51,7 +51,8 @@ variable "vpc_peer_connection" {
   description = "A list of VPC Peering connection id"
   default     = []
 }
+
 variable "enable_vpc_peering" {
   description = "A switch to enable or disable whether addtional routes can be added"
-  default = "false"
+  default     = "false"
 }
