@@ -29,3 +29,11 @@ output "nat_eips" {
 output "nat_ips" {
   value = ["${aws_eip.nateip.*.public_ip}"]
 }
+
+output "private_network_cidrs" {
+  value = ["${aws_subnet.private.*.cidr_block}"]
+}
+
+output "public_network_cidrs" {
+  value = ["${aws_subnet.public.*.cidr_block}"]
+}
